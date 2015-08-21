@@ -1,0 +1,30 @@
+{
+  "name": "mute-stdout",
+  "version": "0.0.0",
+  "description": "Mute and unmute stdout",
+  "author": "Blaine Bublitz <blaine@iceddev.com> (http://iceddev.com)",
+  "contributors": [],
+  "repository": "phated/mute-stdout",
+  "license": "MIT",
+  "engines": {
+    "node": ">= 0.10"
+  },
+  "main": "index.js",
+  "files": [
+    "LICENSE",
+    "index.js"
+  ],
+  "scripts": {
+    "test": "eslint *.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@phated/eslint-config-iceddev": "^0.2.1",
+    "eslint": "^1.2.1"
+  },
+  "keywords": [
+    "mute",
+    "silence is golden",
+    "stdout"
+  ]
+}
