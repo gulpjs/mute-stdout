@@ -4,7 +4,7 @@
   "description": "Mute and unmute stdout",
   "author": "Blaine Bublitz <blaine@iceddev.com> (http://iceddev.com)",
   "contributors": [],
-  "repository": "phated/mute-stdout",
+  "repository": "js-cli/mute-stdout",
   "license": "MIT",
   "engines": {
     "node": ">= 0.10"
