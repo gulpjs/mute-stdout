@@ -1,6 +1,6 @@
 {
   "name": "mute-stdout",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Mute and unmute stdout",
   "author": "Blaine Bublitz <blaine@iceddev.com> (http://iceddev.com)",
   "contributors": [],
