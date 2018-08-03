@@ -58,4 +58,22 @@ lab.describe('unmute', function(){
 
     done();
   });
+
+  lab.it('don\'t replace back when be not muted', function(done) {
+    var ogWrite = process.stdout.write;
+    var counter = 0;
+    process.stdout.write = function() {
+      counter++;
+    };
+
+    console.log('should count up!');
+
+    stdout.unmute();
+
+    console.log('should count up!');
+
+    process.stdout.write = ogWrite;
+    code.expect(counter).to.equal(2);
+    done();
+  });
 });
