@@ -17,7 +17,7 @@
   "scripts": {
     "lint": "eslint *.js test/*.js",
     "pretest": "npm run lint",
-    "test": "lab -cv"
+    "test": "lab -cv --ignore Reflect,SharedArrayBuffer,Atomics,WebAssembly,URL,URLSearchParams,BigUint64Array,BigInt64Array,BigInt"
   },
   "dependencies": {},
   "devDependencies": {
