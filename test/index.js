@@ -1,31 +1,35 @@
 'use strict';
 
-var stream = require('stream');
-
 var expect = require('expect');
+
+// The spy needs to be set up before our module tracks the original method
+var spy = expect.spyOn(process.stdout, 'write').andCallThrough();
 
 var stdout = require('../');
 
 describe('mute', function() {
 
-  var ogWrite = stream.Duplex.prototype.write;
+  beforeEach(function(done) {
+    spy.reset();
+
+    done();
+  });
+
+  afterEach(function(done) {
+    spy.reset();
+
+    done();
+  });
 
   it('mutes the stream', function(done) {
-
-    var writes = 0;
-
-    stream.Duplex.prototype.write = function() {
-      writes++;
-    };
 
     stdout.mute();
 
     console.log('should not print');
 
     stdout.unmute();
-    stream.Duplex.prototype.write = ogWrite;
 
-    expect(writes).toEqual(0);
+    expect(spy).toNotHaveBeenCalled();
 
     done();
   });
@@ -33,15 +37,19 @@ describe('mute', function() {
 
 describe('unmute', function() {
 
-  var ogWrite = stream.Duplex.prototype.write;
+  beforeEach(function(done) {
+    spy.reset();
+
+    done();
+  });
+
+  afterEach(function(done) {
+    spy.reset();
+
+    done();
+  });
 
   it('unmutes a muted stream', function(done) {
-
-    var writes = 0;
-
-    stream.Duplex.prototype.write = function() {
-      writes++;
-    };
 
     stdout.mute();
 
@@ -51,19 +59,13 @@ describe('unmute', function() {
 
     console.log('should print');
 
-    stream.Duplex.prototype.write = ogWrite;
-
-    expect(writes).toEqual(1);
+    expect(spy).toHaveBeenCalled();
+    expect(spy.calls.length).toEqual(1);
 
     done();
   });
 
-  it('don\'t replace back when be not muted', function(done) {
-    var ogWrite = process.stdout.write;
-    var counter = 0;
-    process.stdout.write = function() {
-      counter++;
-    };
+  it('skips unmute if never muted', function(done) {
 
     console.log('should count up!');
 
@@ -71,8 +73,8 @@ describe('unmute', function() {
 
     console.log('should count up!');
 
-    process.stdout.write = ogWrite;
-    expect(counter).toEqual(2);
+    expect(spy).toHaveBeenCalled();
+    expect(spy.calls.length).toEqual(2);
     done();
   });
 });
