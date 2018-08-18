@@ -2,20 +2,19 @@
 
 var stream = require('stream');
 
-var lab = exports.lab = require('lab').script();
-var code = require('code');
+var expect = require('expect');
 
 var stdout = require('../');
 
-lab.describe('mute', function(){
+describe('mute', function() {
 
   var ogWrite = stream.Duplex.prototype.write;
 
-  lab.it('mutes the stream', function(done){
+  it('mutes the stream', function(done) {
 
     var writes = 0;
 
-    stream.Duplex.prototype.write = function(){
+    stream.Duplex.prototype.write = function() {
       writes++;
     };
 
@@ -26,21 +25,21 @@ lab.describe('mute', function(){
     stdout.unmute();
     stream.Duplex.prototype.write = ogWrite;
 
-    code.expect(writes).to.equal(0);
+    expect(writes).toEqual(0);
 
     done();
   });
 });
 
-lab.describe('unmute', function(){
+describe('unmute', function() {
 
   var ogWrite = stream.Duplex.prototype.write;
 
-  lab.it('unmutes a muted stream', function(done){
+  it('unmutes a muted stream', function(done) {
 
     var writes = 0;
 
-    stream.Duplex.prototype.write = function(){
+    stream.Duplex.prototype.write = function() {
       writes++;
     };
 
@@ -54,12 +53,12 @@ lab.describe('unmute', function(){
 
     stream.Duplex.prototype.write = ogWrite;
 
-    code.expect(writes).to.equal(1);
+    expect(writes).toEqual(1);
 
     done();
   });
 
-  lab.it('don\'t replace back when be not muted', function(done) {
+  it('don\'t replace back when be not muted', function(done) {
     var ogWrite = process.stdout.write;
     var counter = 0;
     process.stdout.write = function() {
@@ -73,7 +72,7 @@ lab.describe('unmute', function(){
     console.log('should count up!');
 
     process.stdout.write = ogWrite;
-    code.expect(counter).to.equal(2);
+    expect(counter).toEqual(2);
     done();
   });
 });

@@ -4,14 +4,14 @@ var ogWrite = process.stdout.write;
 
 var muteStdout = { mute: mute, unmute: noop };
 
-function noop(){}
+function noop() {}
 
-function mute(){
+function mute() {
   muteStdout.unmute = unmute;
   process.stdout.write = noop;
 }
 
-function unmute(){
+function unmute() {
   process.stdout.write = ogWrite;
   muteStdout.unmute = noop;
 }

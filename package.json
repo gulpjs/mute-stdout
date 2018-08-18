@@ -1,10 +1,12 @@
 {
   "name": "mute-stdout",
   "version": "1.0.0",
-  "description": "Mute and unmute stdout",
-  "author": "Blaine Bublitz <blaine@iceddev.com> (http://iceddev.com)",
-  "contributors": [],
-  "repository": "js-cli/mute-stdout",
+  "description": "Mute and unmute stdout.",
+  "author": "Gulp Team <team@gulpjs.com> (http://gulpjs.com/)",
+  "contributors": [
+    "Blaine Bublitz <blaine.bublitz@gmail.com>"
+  ],
+  "repository": "gulpjs/mute-stdout",
   "license": "MIT",
   "engines": {
     "node": ">= 0.10"
@@ -15,16 +17,20 @@
     "index.js"
   ],
   "scripts": {
-    "lint": "eslint *.js test/*.js",
+    "lint": "eslint .",
     "pretest": "npm run lint",
-    "test": "lab -cv --ignore Reflect,SharedArrayBuffer,Atomics,WebAssembly"
+    "test": "mocha --async-only",
+    "cover": "istanbul cover _mocha --report lcovonly",
+    "coveralls": "npm run cover && istanbul-coveralls"
   },
   "dependencies": {},
   "devDependencies": {
-    "@phated/eslint-config-iceddev": "^0.2.1",
-    "code": "^1.5.0",
-    "eslint": "^1.2.1",
-    "lab": "^6.2.0"
+    "eslint": "^2.13.0",
+    "eslint-config-gulp": "^3.0.1",
+    "expect": "^1.20.2",
+    "istanbul": "^0.4.3",
+    "istanbul-coveralls": "^1.0.3",
+    "mocha": "^3.5.3"
   },
   "keywords": [
     "mute",
