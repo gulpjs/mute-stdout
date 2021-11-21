@@ -1,22 +1,23 @@
 'use strict';
 
 var expect = require('expect');
+var sinon = require('sinon');
 
 // The spy needs to be set up before our module tracks the original method
-var spy = expect.spyOn(process.stdout, 'write').andCallThrough();
+var spy = sinon.spy(process.stdout, 'write');
 
 var stdout = require('../');
 
 describe('mute', function() {
 
   beforeEach(function(done) {
-    spy.reset();
+    spy.resetHistory();
 
     done();
   });
 
   afterEach(function(done) {
-    spy.reset();
+    spy.resetHistory();
 
     done();
   });
@@ -29,7 +30,7 @@ describe('mute', function() {
 
     stdout.unmute();
 
-    expect(spy).toNotHaveBeenCalled();
+    expect(spy.called).toBeFalsy();
 
     done();
   });
@@ -38,13 +39,13 @@ describe('mute', function() {
 describe('unmute', function() {
 
   beforeEach(function(done) {
-    spy.reset();
+    spy.resetHistory();
 
     done();
   });
 
   afterEach(function(done) {
-    spy.reset();
+    spy.resetHistory();
 
     done();
   });
@@ -59,8 +60,8 @@ describe('unmute', function() {
 
     console.log('should print');
 
-    expect(spy).toHaveBeenCalled();
-    expect(spy.calls.length).toEqual(1);
+    expect(spy.called).toBeTruthy();
+    expect(spy.callCount).toEqual(1);
 
     done();
   });
@@ -73,8 +74,8 @@ describe('unmute', function() {
 
     console.log('should count up!');
 
-    expect(spy).toHaveBeenCalled();
-    expect(spy.calls.length).toEqual(2);
+    expect(spy.called).toBeTruthy();
+    expect(spy.callCount).toEqual(2);
     done();
   });
 });
