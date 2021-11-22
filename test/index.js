@@ -8,22 +8,20 @@ var spy = sinon.spy(process.stdout, 'write');
 
 var stdout = require('../');
 
-describe('mute', function() {
-
-  beforeEach(function(done) {
+describe('mute', function () {
+  beforeEach(function (done) {
     spy.resetHistory();
 
     done();
   });
 
-  afterEach(function(done) {
+  afterEach(function (done) {
     spy.resetHistory();
 
     done();
   });
 
-  it('mutes the stream', function(done) {
-
+  it('mutes the stream', function (done) {
     stdout.mute();
 
     console.log('should not print');
@@ -36,22 +34,20 @@ describe('mute', function() {
   });
 });
 
-describe('unmute', function() {
-
-  beforeEach(function(done) {
+describe('unmute', function () {
+  beforeEach(function (done) {
     spy.resetHistory();
 
     done();
   });
 
-  afterEach(function(done) {
+  afterEach(function (done) {
     spy.resetHistory();
 
     done();
   });
 
-  it('unmutes a muted stream', function(done) {
-
+  it('unmutes a muted stream', function (done) {
     stdout.mute();
 
     console.log('should not print');
@@ -66,8 +62,7 @@ describe('unmute', function() {
     done();
   });
 
-  it('skips unmute if never muted', function(done) {
-
+  it('skips unmute if never muted', function (done) {
     console.log('should count up!');
 
     stdout.unmute();
