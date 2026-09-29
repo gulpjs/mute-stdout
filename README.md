@@ -13,15 +13,15 @@ Mute and unmute stdout.
 ## Usage
 
 ```js
-var stdout = require('mute-stdout');
+var stdout = require("mute-stdout");
 
 stdout.mute();
 
-console.log('will not print');
+console.log("will not print");
 
 stdout.unmute();
 
-console.log('will print');
+console.log("will print");
 ```
 
 ## API
