@@ -53,9 +53,9 @@ MIT
 [npm-url]: https://www.npmjs.com/package/mute-stdout
 [npm-image]: http://img.shields.io/npm/v/mute-stdout.svg?style=flat-square
 
-[ci-url]: https://github.com/gulpjs/gulp-mute-stdout/actions/workflows/dev.yml
-[ci-image]: https://img.shields.io/github/actions/workflow/status/gulpjs/gulp-mute-stdout/dev.yml?style=flat-square
+[ci-url]: https://github.com/gulpjs/mute-stdout/actions/workflows/dev.yml
+[ci-image]: https://img.shields.io/github/actions/workflow/status/gulpjs/mute-stdout/dev.yml?style=flat-square
 
-[coveralls-url]: https://coveralls.io/r/gulpjs/gulp-mute-stdout
-[coveralls-image]: https://img.shields.io/coveralls/gulpjs/gulp-mute-stdout/main.svg?style=flat-square
+[coveralls-url]: https://coveralls.io/r/gulpjs/mute-stdout
+[coveralls-image]: https://img.shields.io/coveralls/gulpjs/mute-stdout/main.svg?style=flat-square
 <!-- prettier-ignore-end -->
