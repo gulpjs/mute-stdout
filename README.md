@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="http://gulpjs.com">
+  <a href="https://gulpjs.com">
     <img height="257" width="114" src="https://raw.githubusercontent.com/gulpjs/artwork/master/gulp-2x.png">
   </a>
 </p>
@@ -13,15 +13,15 @@ Mute and unmute stdout.
 ## Usage
 
 ```js
-var stdout = require('mute-stdout');
+var stdout = require("mute-stdout");
 
 stdout.mute();
 
-console.log('will not print');
+console.log("will not print");
 
 stdout.unmute();
 
-console.log('will print');
+console.log("will print");
 ```
 
 ## API
@@ -34,6 +34,16 @@ Mutes the `process.stdout` stream by replacing the `write` method with a no-op f
 
 Unmutes the `process.stdout` stream by restoring the original `write` method.
 
+## Strict No LLM / No AI Policy
+
+No LLMs for issues.
+
+No LLMs for patches / pull requests.
+
+No LLMs for comments on the bug tracker, including translation.
+
+English is encouraged, but not required. You are welcome to post in your native language and rely on others to have their own translation tools of choice to interpret your words.
+
 ## License
 
 MIT
@@ -43,9 +53,9 @@ MIT
 [npm-url]: https://www.npmjs.com/package/mute-stdout
 [npm-image]: http://img.shields.io/npm/v/mute-stdout.svg?style=flat-square
 
-[ci-url]: https://github.com/gulpjs/mute-stdout/actions?query=workflow:dev
-[ci-image]: https://img.shields.io/github/workflow/status/gulpjs/mute-stdout/dev?style=flat-square
+[ci-url]: https://github.com/gulpjs/mute-stdout/actions/workflows/dev.yml
+[ci-image]: https://img.shields.io/github/actions/workflow/status/gulpjs/mute-stdout/dev.yml?style=flat-square
 
 [coveralls-url]: https://coveralls.io/r/gulpjs/mute-stdout
-[coveralls-image]: http://img.shields.io/coveralls/gulpjs/mute-stdout/master.svg
+[coveralls-image]: https://img.shields.io/coveralls/gulpjs/mute-stdout/main.svg?style=flat-square
 <!-- prettier-ignore-end -->
