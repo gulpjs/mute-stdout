@@ -51,7 +51,7 @@ describe("unmute", function () {
   });
 
   it("captures the current write and preserves it", function () {
-    const fakeWrite = () => true;
+    const fakeWrite = () => {};
 
     process.stdout.write = fakeWrite;
 
@@ -64,11 +64,9 @@ describe("unmute", function () {
 
   it("captures the current write and preserves it when muted twice", function () {
     const originalWrite = process.stdout.write;
-    const fakeWrite = () => true;
 
     stdout.mute();
 
-    process.stdout.write = fakeWrite;
 
     stdout.mute();
 

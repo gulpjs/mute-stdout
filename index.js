@@ -1,7 +1,8 @@
 "use strict";
 
-var muteStdout = { mute: mute, unmute: noop };
 var ogWrite = undefined;
+
+var muteStdout = { mute: mute, unmute: noop };
 
 function noop() {}
 
