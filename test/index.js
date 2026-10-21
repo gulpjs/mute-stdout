@@ -7,7 +7,7 @@ var stdout = require("../");
 
 describe("mute", function () {
   it("mutes the stream", function (t) {
-    const spy = t.mock.method(process.stdout, "_write", () => {});
+    const spy = t.mock.method(process.stdout, "write", () => {});
 
     stdout.mute();
 
@@ -21,7 +21,7 @@ describe("mute", function () {
 
 describe("unmute", function () {
   it("unmutes a muted stream", async function (t) {
-    const spy = t.mock.method(process.stdout, "_write");
+    const spy = t.mock.method(process.stdout, "write", () => {});
 
     stdout.mute();
 
@@ -38,7 +38,7 @@ describe("unmute", function () {
   });
 
   it("skips unmute if never muted", function (t) {
-    const spy = t.mock.method(process.stdout, "_write");
+    const spy = t.mock.method(process.stdout, "write", () => {});
 
     console.log("should count up!");
 
@@ -50,19 +50,27 @@ describe("unmute", function () {
     assert.deepStrictEqual(spy.mock.callCount(), 2);
   });
 
+  it("captures the current write and preserves it", function () {
+    const fakeWrite = () => true;
+
+    process.stdout.write = fakeWrite;
+
+    stdout.mute();
+
+    stdout.unmute();
+
+    assert.strictEqual(process.stdout.write, fakeWrite);
+  });
+
   it("captures the current write and preserves it when muted twice", function () {
     const originalWrite = process.stdout.write;
     const fakeWrite = () => true;
 
     stdout.mute();
 
-    assert.strictEqual(stdout.ogWrite, originalWrite);
-
     process.stdout.write = fakeWrite;
 
     stdout.mute();
-
-    assert.strictEqual(stdout.ogWrite, originalWrite);
 
     stdout.unmute();
 
