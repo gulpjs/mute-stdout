@@ -5,7 +5,7 @@ var muteStdout = { mute: mute, unmute: noop, ogWrite: undefined };
 function noop() {}
 
 function mute() {
-  if (muteStdout.ogWrite != undefined) {
+  if (muteStdout.ogWrite !== undefined) {
     return;
   }
   muteStdout.ogWrite = process.stdout.write;
