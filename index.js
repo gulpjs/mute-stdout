@@ -1,19 +1,26 @@
 "use strict";
 
-var ogWrite = process.stdout.write;
-
-var muteStdout = { mute: mute, unmute: noop };
+var muteStdout = { mute: mute, unmute: noop, ogWrite: undefined };
 
 function noop() {}
 
 function mute() {
+  if (muteStdout.ogWrite != undefined) {
+    return;
+  }
+  muteStdout.ogWrite = process.stdout.write;
   muteStdout.unmute = unmute;
   process.stdout.write = noop;
 }
 
 function unmute() {
-  process.stdout.write = ogWrite;
+  console.log(muteStdout)
+  if (muteStdout.ogWrite === undefined) {
+    return;
+  }
+  process.stdout.write = muteStdout.ogWrite;
   muteStdout.unmute = noop;
+  muteStdout.ogWrite = undefined;
 }
 
 module.exports = muteStdout;

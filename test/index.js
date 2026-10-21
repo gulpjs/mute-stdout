@@ -49,4 +49,23 @@ describe("unmute", function () {
     assert.ok(spy.mock.callCount() > 0);
     assert.deepStrictEqual(spy.mock.callCount(), 2);
   });
+
+  it("captures the current write and preserves it when muted twice", function () {
+    const originalWrite = process.stdout.write;
+    const fakeWrite = () => true;
+
+    stdout.mute();
+
+    assert.strictEqual(stdout.ogWrite, originalWrite);
+
+    process.stdout.write = fakeWrite;
+
+    stdout.mute();
+
+    assert.strictEqual(stdout.ogWrite, originalWrite);
+
+    stdout.unmute();
+
+    assert.strictEqual(process.stdout.write, originalWrite);
+  });
 });
