@@ -14,7 +14,6 @@ function mute() {
 }
 
 function unmute() {
-  console.log(muteStdout)
   if (muteStdout.ogWrite === undefined) {
     return;
   }
