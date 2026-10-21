@@ -20,7 +20,7 @@ describe("mute", function () {
 });
 
 describe("unmute", function () {
-  it("unmutes a muted stream", async function (t) {
+  it("unmutes a muted stream", function (t) {
     const spy = t.mock.method(process.stdout, "write", () => {});
 
     stdout.mute();
