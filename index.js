@@ -2,7 +2,7 @@
 
 var ogWrite = undefined;
 
-var muteStdout = { mute: mute, unmute: noop };
+var muteStdout = { mute: mute, unmute: unmute };
 
 function noop() {}
 
@@ -11,7 +11,6 @@ function mute() {
     return;
   }
   ogWrite = process.stdout.write;
-  muteStdout.unmute = unmute;
   process.stdout.write = noop;
 }
 
@@ -20,7 +19,6 @@ function unmute() {
     return;
   }
   process.stdout.write = ogWrite;
-  muteStdout.unmute = noop;
   ogWrite = undefined;
 }
 
