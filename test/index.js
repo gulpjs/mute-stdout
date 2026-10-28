@@ -1,76 +1,74 @@
 "use strict";
 
-var expect = require("expect");
-var sinon = require("sinon");
-
-// The spy needs to be set up before our module tracks the original method
-var spy = sinon.spy(process.stdout, "write");
+var assert = require("node:assert");
+var { describe, it } = require("node:test");
 
 var stdout = require("../");
 
 describe("mute", function () {
-  beforeEach(function (done) {
-    spy.resetHistory();
+  it("mutes the stream", function (t) {
+    const spy = t.mock.method(process.stdout, "write", () => {});
 
-    done();
-  });
-
-  afterEach(function (done) {
-    spy.resetHistory();
-
-    done();
-  });
-
-  it("mutes the stream", function (done) {
     stdout.mute();
 
     console.log("should not print");
 
     stdout.unmute();
 
-    expect(spy.called).toBeFalsy();
-
-    done();
+    assert.deepStrictEqual(spy.mock.callCount(), 0);
   });
 });
 
 describe("unmute", function () {
-  beforeEach(function (done) {
-    spy.resetHistory();
+  it("unmutes a muted stream", function (t) {
+    const spy = t.mock.method(process.stdout, "write", () => {});
 
-    done();
-  });
-
-  afterEach(function (done) {
-    spy.resetHistory();
-
-    done();
-  });
-
-  it("unmutes a muted stream", function (done) {
     stdout.mute();
 
     console.log("should not print");
+
+    assert.deepStrictEqual(spy.mock.callCount(), 0);
 
     stdout.unmute();
 
     console.log("should print");
 
-    expect(spy.called).toBeTruthy();
-    expect(spy.callCount).toEqual(1);
-
-    done();
+    assert.ok(spy.mock.callCount() > 0);
+    assert.deepStrictEqual(spy.mock.callCount(), 1);
   });
 
-  it("skips unmute if never muted", function (done) {
+  it("skips unmute if never muted", function (t) {
+    const spy = t.mock.method(process.stdout, "write", () => {});
+
     console.log("should count up!");
 
     stdout.unmute();
 
     console.log("should count up!");
 
-    expect(spy.called).toBeTruthy();
-    expect(spy.callCount).toEqual(2);
-    done();
+    assert.ok(spy.mock.callCount() > 0);
+    assert.deepStrictEqual(spy.mock.callCount(), 2);
+  });
+
+  it("captures the current write and preserves it", function (t) {
+    const spy = t.mock.method(process.stdout, "write", () => {});
+
+    stdout.mute();
+
+    stdout.unmute();
+
+    assert.strictEqual(process.stdout.write, spy);
+  });
+
+  it("captures the current write and preserves it when muted twice", function () {
+    const originalWrite = process.stdout.write;
+
+    stdout.mute();
+
+    stdout.mute();
+
+    stdout.unmute();
+
+    assert.strictEqual(process.stdout.write, originalWrite);
   });
 });
