@@ -50,23 +50,20 @@ describe("unmute", function () {
     assert.deepStrictEqual(spy.mock.callCount(), 2);
   });
 
-  it("captures the current write and preserves it", function () {
-    const fakeWrite = () => {};
-
-    process.stdout.write = fakeWrite;
+  it("captures the current write and preserves it", function (t) {
+    const spy = t.mock.method(process.stdout, "write", () => {});
 
     stdout.mute();
 
     stdout.unmute();
 
-    assert.strictEqual(process.stdout.write, fakeWrite);
+    assert.strictEqual(process.stdout.write, spy);
   });
 
   it("captures the current write and preserves it when muted twice", function () {
     const originalWrite = process.stdout.write;
 
     stdout.mute();
-
 
     stdout.mute();
 
