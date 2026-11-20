@@ -1,17 +1,15 @@
 var ogWrite = undefined;
 
-var muteStdout = { mute: mute, unmute: unmute };
-
 function noop() {}
 
-function mute() {
+export function mute() {
   if (typeof ogWrite === "undefined") {
     ogWrite = process.stdout.write;
     process.stdout.write = noop;
   }
 }
 
-function unmute() {
+export function unmute() {
   if (typeof ogWrite !== "undefined") {
     process.stdout.write = ogWrite;
     ogWrite = undefined;

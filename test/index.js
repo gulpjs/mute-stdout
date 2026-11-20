@@ -1,17 +1,17 @@
 import assert from "node:assert";
 import { describe, it } from "node:test";
 
-import stdout from "../index.js";
+import { mute, unmute } from "../index.js";
 
 describe("mute", function () {
   it("mutes the stream", function (t) {
     const spy = t.mock.method(process.stdout, "write", () => {});
 
-    stdout.mute();
+    mute();
 
     console.log("should not print");
 
-    stdout.unmute();
+    unmute();
 
     assert.deepStrictEqual(spy.mock.callCount(), 0);
   });
@@ -21,13 +21,13 @@ describe("unmute", function () {
   it("unmutes a muted stream", function (t) {
     const spy = t.mock.method(process.stdout, "write", () => {});
 
-    stdout.mute();
+    mute();
 
     console.log("should not print");
 
     assert.deepStrictEqual(spy.mock.callCount(), 0);
 
-    stdout.unmute();
+    unmute();
 
     console.log("should print");
 
@@ -40,7 +40,7 @@ describe("unmute", function () {
 
     console.log("should count up!");
 
-    stdout.unmute();
+    unmute();
 
     console.log("should count up!");
 
@@ -51,9 +51,9 @@ describe("unmute", function () {
   it("captures the current write and preserves it", function (t) {
     const spy = t.mock.method(process.stdout, "write", () => {});
 
-    stdout.mute();
+    mute();
 
-    stdout.unmute();
+    unmute();
 
     assert.strictEqual(process.stdout.write, spy);
   });
@@ -61,11 +61,11 @@ describe("unmute", function () {
   it("captures the current write and preserves it when muted twice", function () {
     const originalWrite = process.stdout.write;
 
-    stdout.mute();
+    mute();
 
-    stdout.mute();
+    mute();
 
-    stdout.unmute();
+    unmute();
 
     assert.strictEqual(process.stdout.write, originalWrite);
   });
