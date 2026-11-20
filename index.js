@@ -1,5 +1,3 @@
-"use strict";
-
 var ogWrite = undefined;
 
 var muteStdout = { mute: mute, unmute: unmute };
@@ -20,4 +18,4 @@ function unmute() {
   }
 }
 
-module.exports = muteStdout;
+export default muteStdout;

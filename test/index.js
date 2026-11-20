@@ -1,9 +1,7 @@
-"use strict";
+import assert from "node:assert";
+import { describe, it } from "node:test";
 
-var assert = require("node:assert");
-var { describe, it } = require("node:test");
-
-var stdout = require("../");
+import stdout from "../index.js";
 
 describe("mute", function () {
   it("mutes the stream", function (t) {
