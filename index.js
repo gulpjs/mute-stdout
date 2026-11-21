@@ -15,5 +15,3 @@ export function unmute() {
     ogWrite = undefined;
   }
 }
-
-export default muteStdout;
