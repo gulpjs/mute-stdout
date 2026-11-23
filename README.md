@@ -13,7 +13,7 @@ Mute and unmute stdout.
 ## Usage
 
 ```js
-import {mute, unmute} from "mute-stdout";
+import { mute, unmute } from "mute-stdout";
 
 mute();
 
