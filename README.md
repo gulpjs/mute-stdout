@@ -13,13 +13,13 @@ Mute and unmute stdout.
 ## Usage
 
 ```js
-var stdout = require("mute-stdout");
+import { mute, unmute } from "mute-stdout";
 
-stdout.mute();
+mute();
 
 console.log("will not print");
 
-stdout.unmute();
+unmute();
 
 console.log("will print");
 ```
